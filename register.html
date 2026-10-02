@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء بطاقة طبية — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="register" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <main id="main" class="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    <div class="text-center mb-8" data-reveal>
+      <span class="section-kicker"><i data-icon="shield" class="w-3.5 h-3.5"></i> أربع خطوات قصيرة</span>
+      <h1 id="reg-title" class="section-title mt-4">إنشاء بطاقة طبية</h1>
+      <p id="reg-sub" class="section-sub mt-2 max-w-xl mx-auto">
+       املأ بياناتك الطبية بدقة — هذه هي المعلومات التي سيعتمد عليها فريق الطوارئ.
+        الحقول المميزة بـ <span class="text-danger-600 font-bold">*</span> مطلوبة.
+      </p>
+    </div>
+
+    <div class="panel p-5 sm:p-8" data-reveal>
+      <ol id="steps-bar" class="flex items-center gap-1 sm:gap-2 mb-9" aria-label="خطوات التسجيل"></ol>
+
+      <form id="reg-form" novalidate>
+        <!-- ===== الخطوة 1: البيانات الشخصية ===== -->
+        <section data-step="0">
+          <h2 class="text-lg font-bold mb-6" tabindex="-1">البيانات الشخصية</h2>
+          <div class="grid sm:grid-cols-2 gap-x-5 gap-y-5">
+            <div class="sm:col-span-2">
+              <label class="label" for="fullName">الاسم بالكامل <span class="text-danger-600">*</span></label>
+              <input class="input" id="fullName" type="text" autocomplete="name" placeholder="مثال: أحمد محمد عبدالله">
+              <p class="err" id="err-fullName"></p>
+            </div>
+            <div>
+              <label class="label" for="nid">الرقم القومي <span class="text-danger-600">*</span></label>
+              <input class="input font-mono" id="nid" type="text" inputmode="numeric" dir="ltr" placeholder="14 رقمًا">
+              <p class="err" id="err-nid"></p>
+            </div>
+            <div>
+              <label class="label" for="birthDate">تاريخ الميلاد <span class="text-danger-600">*</span></label>
+              <input class="input" id="birthDate" type="date">
+              <p class="err" id="err-birthDate"></p>
+            </div>
+            <div>
+              <label class="label" for="phone">رقم الهاتف <span class="text-danger-600">*</span></label>
+              <input class="input font-mono" id="phone" type="tel" inputmode="numeric" dir="ltr" placeholder="01xxxxxxxxx">
+              <p class="err" id="err-phone"></p>
+            </div>
+            <div>
+              <label class="label" for="address">العنوان <span class="text-danger-600">*</span></label>
+              <input class="input" id="address" type="text" autocomplete="street-address" placeholder="المدينة — الشارع">
+              <p class="err" id="err-address"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== الخطوة 2: المعلومات الطبية ===== -->
+        <section data-step="1" hidden>
+          <h2 class="text-lg font-bold mb-6" tabindex="-1">المعلومات الطبية</h2>
+          <div class="rounded-xl bg-brand-50 border border-brand-100 p-4 flex gap-3 text-sm text-brand-800 leading-7 mb-6">
+            <i data-icon="info" class="w-5 h-5 flex-none mt-0.5 text-brand-600"></i>
+            <p>اكتب الحقول الطبية بوضوح كما تريد أن يقرأها المسعف — اترك الحقل فارغًا إذا لا ينطبق عليك.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-x-5 gap-y-5">
+            <div>
+              <label class="label" for="bloodType">فصيلة الدم <span class="text-danger-600">*</span></label>
+              <select class="input" id="bloodType">
+                <option value="" selected disabled>اختر الفصيلة</option>
+                <option>O+</option><option>O-</option><option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option><option>AB+</option><option>AB-</option>
+              </select>
+              <p class="err" id="err-bloodType"></p>
+            </div>
+            <div>
+              <label class="label" for="allergies">الحساسية</label>
+              <input class="input" id="allergies" type="text" placeholder="مثال: البنسلين، الفول السوداني">
+              <p class="hint">افصل بينها بفاصلة — تظهر للمسعف كتحذير حرج.</p>
+            </div>
+            <div>
+              <label class="label" for="diseases">الأمراض المزمنة</label>
+              <input class="input" id="diseases" type="text" placeholder="مثال: الربو، السكري">
+            </div>
+            <div>
+              <label class="label" for="medications">الأدوية الحالية</label>
+              <input class="input" id="medications" type="text" placeholder="مثال: Ventolin، Insulin">
+            </div>
+            <div>
+              <label class="label" for="surgeries">العمليات السابقة</label>
+              <input class="input" id="surgeries" type="text" placeholder="مثال: استئصال الزائدة 2019">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="label" for="notes">ملاحظات طبية مهمة</label>
+              <textarea class="input" id="notes" rows="3" placeholder="أي معلومة قد تنقذ حياتك: شدة الحساسية، تعليمات خاصة، أجهزة طبية…"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== الخطوة 3: جهة اتصال الطوارئ ===== -->
+        <section data-step="2" hidden>
+          <h2 class="text-lg font-bold mb-6" tabindex="-1">جهة اتصال الطوارئ</h2>
+          <div class="grid sm:grid-cols-2 gap-x-5 gap-y-5">
+            <div>
+              <label class="label" for="ecName">اسم الشخص <span class="text-danger-600">*</span></label>
+              <input class="input" id="ecName" type="text" placeholder="اسم قريب يسهل الوصول إليه">
+              <p class="err" id="err-ecName"></p>
+            </div>
+            <div>
+              <label class="label" for="ecRelation">صلة القرابة <span class="text-danger-600">*</span></label>
+              <select class="input" id="ecRelation">
+                <option value="" selected disabled>اختر صلة القرابة</option>
+                <option>الأب</option><option>الأم</option><option>الزوج</option><option>الزوجة</option>
+                <option>الأخ</option><option>الأخت</option><option>الابن</option><option>الابنة</option>
+                <option>صديق</option><option>أخرى</option>
+              </select>
+              <p class="err" id="err-ecRelation"></p>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="label" for="ecPhone">رقم الهاتف <span class="text-danger-600">*</span></label>
+              <input class="input font-mono" id="ecPhone" type="tel" inputmode="numeric" dir="ltr" placeholder="01xxxxxxxxx">
+              <p class="err" id="err-ecPhone"></p>
+              <p class="hint">تأكد من أن هذا الشخص يعلم أنه مسجَّل جهة اتصال طوارئ لديك.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== الخطوة 4: المراجعة ===== -->
+        <section data-step="3" hidden>
+          <h2 class="text-lg font-bold mb-5" tabindex="-1">المراجعة والتأكيد</h2>
+          <div id="review"></div>
+          <label class="mt-2 flex items-start gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4 cursor-pointer">
+            <input type="checkbox" id="agree" class="mt-1 w-4 h-4 accent-[#0F7794]">
+            <span class="text-sm leading-6">أقرّ بأن جميع البيانات المدخلة صحيحة، وأوافق على ظهورها لفرق الطوارئ عند مسح كود البطاقة.</span>
+          </label>
+          <p class="err" id="err-agree">يجب الإقرار بصحة البيانات قبل المتابعة.</p>
+        </section>
+
+        <!-- أزرار التنقل -->
+        <div class="mt-8 flex items-center justify-between gap-3 border-t border-slate-100 pt-6">
+          <button type="button" id="btn-prev" class="btn btn-outline" hidden><i data-icon="chev-r" class="w-4 h-4"></i> السابق</button>
+          <span id="nav-spacer" class="flex-1"></span>
+          <button type="button" id="btn-next" class="btn btn-primary">التالي <i data-icon="chev-l" class="w-4 h-4"></i></button>
+          <button type="submit" id="btn-confirm" class="btn btn-primary" hidden><i data-icon="check" class="w-4 h-4"></i> تأكيد وإنشاء البطاقة</button>
+        </div>
+      </form>
+    </div>
+
+    <p class="text-center text-xs text-slate-400 mt-6">بياناتك تُحفظ محليًا على جهازك فقط في هذه النسخة التجريبية.</p>
+  </main>
+
+  <div id="hc-footer"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/registration.js"></script>
+</body>
+</html>

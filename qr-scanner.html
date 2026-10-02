@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مسح رمز QR — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+
+  <!-- ===== Theme Init (must run BEFORE first paint) ===== -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('hc-theme');
+        if (t !== 'dark' && t !== 'light') t = 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.style.colorScheme = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="qr" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <main id="main" class="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 py-10">
+    <a href="emergency.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline mb-5">
+      <i data-icon="chev-r" class="w-4 h-4"></i> العودة لشاشة الطوارئ
+    </a>
+    <h1 class="section-title">مسح رمز QR</h1>
+    <p class="section-sub mt-2">الطريقة الأساسية للتعريف — وجّه كاميرا الجهاز نحو رمز البطاقة.</p>
+
+    <!-- منطقة المسح -->
+    <div class="mt-8 rounded-3xl bg-navy-950 p-4 sm:p-6 shadow-pop" data-reveal>
+      <div id="scan-stage" class="scan-stage relative aspect-[4/3] rounded-2xl bg-navy-900 overflow-hidden grid place-items-center">
+        <!-- عنصر نائب للكاميرا -->
+        <div class="text-center px-6">
+          <i data-icon="camera" class="w-10 h-10 text-slate-600 mx-auto"></i>
+          <p class="text-slate-500 text-sm mt-3">معاينة الكاميرا</p>
+          <p class="text-slate-600 text-xs mt-1">غير مفعّلة في نموذج الواجهة — سيتم الدمج مع الكاميرا عند التكامل</p>
+        </div>
+        <!-- إطار المسح -->
+        <div class="absolute inset-0 m-auto w-44 h-44 sm:w-52 sm:h-52 pointer-events-none" aria-hidden="true">
+          <span class="scan-corner tl"></span><span class="scan-corner tr"></span>
+          <span class="scan-corner bl"></span><span class="scan-corner br"></span>
+          <div id="scan-line" class="scanline hidden"></div>
+          <span id="scan-ok" class="hidden absolute inset-0 grid place-items-center">
+            <span class="pop-in w-16 h-16 rounded-full bg-emerald-500 text-white grid place-items-center shadow-lg"><i data-icon="check" class="w-8 h-8"></i></span>
+          </span>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-2.5 text-sm text-slate-300">
+        <span id="scan-dot" class="w-2.5 h-2.5 rounded-full flex-none bg-slate-500"></span>
+        <span id="scan-status" role="status">جاهز للمسح</span>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="btn-start" class="btn btn-primary flex-1"><i data-icon="qr" class="w-4 h-4"></i> بدء المسح</button>
+        <button id="btn-cancel" class="btn btn-ghost border border-white/20 text-white hidden">إلغاء</button>
+      </div>
+    </div>
+
+    <!-- التعليمات -->
+    <div class="panel p-5 mt-6" data-reveal>
+      <h2 class="panel-title mb-3"><i data-icon="info" class="w-5 h-5"></i> تعليمات المسح</h2>
+      <ol class="text-sm text-slate-600 leading-7 list-decimal ps-5 space-y-1">
+        <li>أمسك البطاقة على مسافة 15–25 سم من الكاميرا.</li>
+        <li>اجعل الرمز كاملًا داخل الإطار وإضاءة المكان كافية.</li>
+        <li>عند نجاح المسح يُفتح الملف الطبي للطوارئ تلقائيًا.</li>
+      </ol>
+    </div>
+
+    <!-- الإدخال اليدوي -->
+    <div class="panel p-5 mt-4" data-reveal>
+      <h2 class="panel-title mb-4"><i data-icon="search" class="w-5 h-5"></i> إدخال الكود يدويًا</h2>
+      <form id="qr-manual-form" class="flex flex-col sm:flex-row gap-3" novalidate>
+        <div class="flex-1">
+          <label class="sr-only" for="qr-manual">كود حياة كود</label>
+          <input id="qr-manual" class="input font-mono" dir="ltr" placeholder="HC-2026-000123" autocomplete="off" aria-describedby="qr-manual-err">
+          <p class="err" id="qr-manual-err"></p>
+        </div>
+        <button type="submit" class="btn btn-primary shrink-0">فتح الملف</button>
+      </form>
+      <p class="hint">مثال على صيغة الكود: <span class="font-mono" dir="ltr">HC-2026-000123</span></p>
+    </div>
+  </main>
+
+  <div id="hc-footer"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/qr.js"></script>
+
+  <!-- ===== Theme runtime (toggle logic) ===== -->
+  <script src="js/theme.js"></script>
+</body>
+</html>

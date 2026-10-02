@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملف الطبي — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="profile" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <main id="main" class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8" data-reveal>
+      <div>
+        <span class="section-kicker">السجل الصحي</span>
+        <h1 class="section-title mt-3">الملف الطبي</h1>
+        <p class="section-sub mt-1">جميع المعلومات كما سيراها فريق الطوارئ عند مسح الكود.</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="register.html?edit=1" class="btn btn-outline"><i data-icon="edit" class="w-4 h-4"></i> تعديل البيانات</a>
+        <a href="card.html" class="btn btn-outline"><i data-icon="card" class="w-4 h-4"></i> عرض البطاقة</a>
+        <a href="card.html#print" class="btn btn-primary"><i data-icon="print" class="w-4 h-4"></i> طباعة البطاقة</a>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-6 items-start">
+      <!-- العمود الرئيسي -->
+      <div class="grid gap-6">
+        <!-- البيانات الشخصية -->
+        <section class="panel p-5 sm:p-6" data-reveal>
+          <h2 class="panel-title mb-5"><i data-icon="user" class="w-5 h-5"></i> البيانات الشخصية</h2>
+          <dl class="grid sm:grid-cols-2 gap-x-6 gap-y-5 text-sm">
+            <div><dt class="text-slate-500 text-xs font-semibold mb-1">الاسم بالكامل</dt><dd class="font-bold" id="p-name"></dd></div>
+            <div><dt class="text-slate-500 text-xs font-semibold mb-1">الرقم القومي</dt><dd class="font-mono" dir="ltr" id="p-nid"></dd></div>
+            <div>
+              <dt class="text-slate-500 text-xs font-semibold mb-1">تاريخ الميلاد</dt>
+              <dd class="font-bold flex items-center gap-2 flex-wrap"><span id="p-birth"></span><span class="chip chip-navy !text-[11px]" id="p-age"></span></dd>
+            </div>
+            <div><dt class="text-slate-500 text-xs font-semibold mb-1">رقم الهاتف</dt><dd class="font-mono" dir="ltr" id="p-phone"></dd></div>
+            <div class="sm:col-span-2">
+              <dt class="text-slate-500 text-xs font-semibold mb-1 flex items-center gap-1.5"><i data-icon="map-pin" class="w-3.5 h-3.5"></i> العنوان</dt>
+              <dd class="font-medium" id="p-address"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- المعلومات الطبية -->
+        <section class="panel p-5 sm:p-6" data-reveal>
+          <h2 class="panel-title mb-5"><i data-icon="heart-pulse" class="w-5 h-5"></i> المعلومات الطبية</h2>
+
+          <div class="rounded-2xl bg-navy-900 text-white p-5 flex items-center gap-4 flex-wrap">
+            <span class="w-16 h-16 rounded-2xl bg-danger-500 grid place-items-center font-bold text-2xl flex-none shadow-card" id="p-blood"></span>
+            <div class="min-w-0">
+              <p class="font-bold">فصيلة الدم</p>
+              <p class="text-xs text-slate-400 mt-1">أول ما يبحث عنه فريق الطوارئ في أي تدخل طبي.</p>
+            </div>
+            <span class="ms-auto chip bg-white/10 text-white border-white/15">بيانات حرجة</span>
+          </div>
+
+          <div class="mt-5 rounded-2xl border-2 border-danger-100 bg-danger-50 p-4">
+            <h3 class="flex items-center gap-2 text-danger-700 font-bold text-sm"><i data-icon="alert" class="w-5 h-5"></i> حساسية — تحذير حرج للمسعف</h3>
+            <div id="p-allergies" class="mt-3 flex flex-wrap gap-2"></div>
+          </div>
+
+          <div class="mt-5 grid sm:grid-cols-2 gap-5">
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <h3 class="text-sm font-bold flex items-center gap-2"><i data-icon="heart-pulse" class="w-4 h-4 text-brand-500"></i> الأمراض المزمنة</h3>
+              <div id="p-diseases" class="mt-3 flex flex-wrap gap-2"></div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <h3 class="text-sm font-bold flex items-center gap-2"><i data-icon="pill" class="w-4 h-4 text-brand-500"></i> الأدوية الحالية</h3>
+              <div id="p-meds" class="mt-3 flex flex-wrap gap-2"></div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4 sm:col-span-2">
+              <h3 class="text-sm font-bold flex items-center gap-2"><i data-icon="file" class="w-4 h-4 text-brand-500"></i> العمليات السابقة</h3>
+              <div id="p-surgeries" class="mt-3 flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="mt-5 rounded-2xl bg-slate-50 border border-slate-200 border-s-4 border-s-brand-400 p-4">
+            <h3 class="text-sm font-bold flex items-center gap-2"><i data-icon="file" class="w-4 h-4 text-brand-600"></i> ملاحظات طبية مهمة</h3>
+            <p id="p-notes" class="mt-2 text-sm leading-8 text-navy-800"></p>
+          </div>
+        </section>
+      </div>
+
+      <!-- العمود الجانبي -->
+      <aside class="grid gap-6 lg:sticky lg:top-24">
+        <section class="panel p-5" data-reveal>
+          <h2 class="panel-title mb-4"><i data-icon="card" class="w-5 h-5"></i> بطاقتي</h2>
+          <div id="p-card"></div>
+          <a href="card.html" class="btn btn-outline w-full mt-4">عرض البطاقة بالحجم الكامل</a>
+        </section>
+
+        <section class="panel p-5" data-reveal>
+          <h2 class="panel-title mb-4"><i data-icon="phone" class="w-5 h-5"></i> جهة اتصال الطوارئ</h2>
+          <div class="flex items-center gap-3">
+            <span class="w-11 h-11 rounded-full bg-brand-50 text-brand-700 grid place-items-center font-bold" id="p-ec-initials"></span>
+            <div class="min-w-0">
+              <p class="font-bold text-sm truncate" id="p-ec-name"></p>
+              <p class="text-xs text-slate-500"><span class="chip chip-navy !text-[10px] !px-2 !py-0.5" id="p-ec-rel"></span></p>
+            </div>
+          </div>
+          <p class="mt-3 font-mono text-center text-sm bg-slate-50 border border-slate-200 rounded-lg py-2" dir="ltr" id="p-ec-phone"></p>
+          <a id="p-ec-call" href="#" class="btn btn-danger w-full mt-3"><i data-icon="phone" class="w-4 h-4"></i> اتصال</a>
+        </section>
+
+        <section class="panel p-5" data-reveal>
+          <h2 class="panel-title mb-4"><i data-icon="shield" class="w-5 h-5"></i> حالة الملف</h2>
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span id="p-comp-num" class="font-bold text-brand-700"></span>
+            <span class="chip chip-ok" id="p-status"></span>
+          </div>
+          <div class="meter"><i id="p-comp-bar" style="width:0%"></i></div>
+          <p class="text-xs text-slate-400 mt-3" id="p-created"></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <div id="hc-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    /* الأحرف الأولى لجهة الاتصال */
+    document.addEventListener('DOMContentLoaded', function () {
+      var ec = HC.Storage.getCitizen().emergencyContact || {};
+      var el = document.getElementById('p-ec-initials');
+      if (el) el.textContent = HC.initials(ec.name);
+    });
+  </script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البطاقة الطبية — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+
+  <!-- ===== Theme Init (must run BEFORE first paint) ===== -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('hc-theme');
+        if (t !== 'dark' && t !== 'light') t = 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.style.colorScheme = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="card" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <main id="main" class="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    <div class="text-center mb-8 no-print" data-reveal>
+      <span class="section-kicker"><i data-icon="card" class="w-3.5 h-3.5"></i> بحجم بطاقة البلاستيك القياسية</span>
+      <h1 class="section-title mt-4">بطاقتك الطبية</h1>
+      <p class="section-sub mt-2">الوجه الأمامي: الاسم ورمز QR وفصيلة الدم — الوجه الخلفي: الباركود وجهة اتصال الطوارئ.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-2">
+        <button id="btn-print" class="btn btn-primary"><i data-icon="print" class="w-4 h-4"></i> طباعة البطاقة</button>
+        <button id="btn-download" class="btn btn-outline"><i data-icon="download" class="w-4 h-4"></i> تحميل البطاقة</button>
+        <a href="profile.html" class="btn btn-ghost-dark"><i data-icon="chev-r" class="w-4 h-4"></i> العودة للملف</a>
+      </div>
+    </div>
+
+    <!-- المنطقة القابلة للطباعة -->
+    <div id="print-root" class="print-sheet flex flex-col items-center" data-reveal>
+      <div id="card-holder" class="w-full max-w-[380px]"></div>
+      <p class="no-print text-xs text-slate-400 mt-5">اضغط على البطاقة (أو Tab ثم Enter) لقلبها وعرض الوجه الخلفي.</p>
+    </div>
+
+    <div class="no-print mt-10 grid sm:grid-cols-3 gap-4" data-reveal>
+      <div class="panel p-4 text-center">
+        <span class="w-10 h-10 mx-auto rounded-xl bg-brand-50 text-brand-600 grid place-items-center"><i data-icon="print" class="w-5 h-5"></i></span>
+        <p class="text-sm font-bold mt-3">اطبعها واقطعها</p>
+        <p class="text-xs text-slate-500 mt-1 leading-6">مقاس 86×54 مم — تناسب أي محفظة.</p>
+      </div>
+      <div class="panel p-4 text-center">
+        <span class="w-10 h-10 mx-auto rounded-xl bg-brand-50 text-brand-600 grid place-items-center"><i data-icon="qr" class="w-5 h-5"></i></span>
+        <p class="text-sm font-bold mt-3">جرّب المسح</p>
+        <p class="text-xs text-slate-500 mt-1 leading-6">امسح رمز البطاقة بكاميرا هاتفك الآن.</p>
+      </div>
+      <div class="panel p-4 text-center">
+        <span class="w-10 h-10 mx-auto rounded-xl bg-brand-50 text-brand-600 grid place-items-center"><i data-icon="fingerprint" class="w-5 h-5"></i></span>
+        <p class="text-sm font-bold mt-3">بصمة قريبًا</p>
+        <p class="text-xs text-slate-500 mt-1 leading-6">التحقق الحيوي في المرحلة التالية من المشروع.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="hc-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/card.js"></script>
+
+  <!-- ===== Theme runtime (toggle logic) ===== -->
+  <script src="js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دخول الطوارئ — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="emergency" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <!-- شريط وضع الطوارئ -->
+  <div class="bg-danger-600 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3 text-sm">
+      <i data-icon="alert" class="w-4 h-4 flex-none"></i>
+      <p class="font-bold">وضع الطوارئ</p>
+      <p class="text-white/85 hidden sm:block">واجهة مخصصة لفرق الإسعاف والطوارئ — التعريف بالمواطن خلال ثوانٍ</p>
+      <span class="ms-auto font-mono text-xs bg-white/15 rounded-md px-2 py-1" dir="ltr" id="hub-clock">00:00:00</span>
+    </div>
+  </div>
+
+  <main id="main" class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <div class="mb-8" data-reveal>
+      <h1 class="section-title">التعريف بالمواطن</h1>
+      <p class="section-sub mt-2 max-w-2xl">اختر وسيلة التعريف المتاحة لديك — جميع الطرق تؤدي إلى نفس الملف الطبي للطوارئ مرتّبًا حسب الأولوية.</p>
+    </div>
+
+    <!-- الوسائل الثلاث الكبرى -->
+    <div class="grid sm:grid-cols-3 gap-4" data-reveal>
+      <a href="qr-scanner.html" class="group relative panel !rounded-2xl p-6 flex flex-col bg-navy-900 text-white border-0 hover:-translate-y-1 hover:shadow-pop transition-all">
+        <span class="absolute top-4 end-4 text-[10px] font-bold bg-brand-500/25 text-brand-200 border border-brand-400/30 rounded-full px-2.5 py-1">الأسرع</span>
+        <span class="w-14 h-14 rounded-2xl bg-white/10 grid place-items-center text-brand-300 group-hover:scale-105 transition-transform"><i data-icon="qr" class="w-7 h-7"></i></span>
+        <span class="mt-5 font-bold text-lg">مسح QR Code</span>
+        <span class="text-xs text-slate-400 mt-1">الكاميرا — الطريقة الأساسية</span>
+        <span class="mt-5 pt-1 text-xs font-semibold text-brand-300 inline-flex items-center gap-1.5">ابدأ المسح<i data-icon="chev-l" class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform"></i></span>
+      </a>
+
+      <a href="barcode.html" class="group panel !rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-pop transition-all">
+        <span class="w-14 h-14 rounded-2xl bg-navy-900/5 bg-slate-100 grid place-items-center text-navy-800 group-hover:scale-105 transition-transform"><i data-icon="barcode" class="w-7 h-7"></i></span>
+        <span class="mt-5 font-bold text-lg">مسح Barcode</span>
+        <span class="text-xs text-slate-500 mt-1">قارئ الباركود — الطريقة البديلة</span>
+        <span class="mt-5 pt-1 text-xs font-semibold text-brand-700 inline-flex items-center gap-1.5">فتح الباركود<i data-icon="chev-l" class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform"></i></span>
+      </a>
+
+      <a href="fingerprint.html" class="group panel !rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-pop transition-all">
+        <span class="w-14 h-14 rounded-2xl bg-slate-100 grid place-items-center text-navy-800 group-hover:scale-105 transition-transform"><i data-icon="fingerprint" class="w-7 h-7"></i></span>
+        <span class="mt-5 font-bold text-lg">التعرف بالبصمة</span>
+        <span class="text-xs text-slate-500 mt-1">التحقق الحيوي — محاكاة واجهة</span>
+        <span class="mt-5 pt-1 text-xs font-semibold text-brand-700 inline-flex items-center gap-1.5">بدء التحقق<i data-icon="chev-l" class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform"></i></span>
+      </a>
+    </div>
+
+    <!-- الوسيلة الرابعة: البحث اليدوي -->
+    <div class="panel !rounded-2xl p-5 sm:p-6 mt-4" data-reveal>
+      <form id="manual-form" class="flex flex-col lg:flex-row lg:items-center gap-4" novalidate>
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="w-11 h-11 rounded-xl bg-slate-100 text-navy-800 grid place-items-center"><i data-icon="search" class="w-5 h-5"></i></span>
+          <div>
+            <label for="manual-code" class="block font-bold text-sm">البحث بالكود</label>
+            <p class="text-xs text-slate-500 mt-0.5">إدخال المعرّف يدويًا عند تعذر المسح</p>
+          </div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <input id="manual-code" class="input font-mono" dir="ltr" placeholder="HC-2026-000123" autocomplete="off" aria-describedby="manual-err">
+          <p class="err" id="manual-err"></p>
+        </div>
+        <button type="submit" class="btn btn-primary shrink-0"><i data-icon="search" class="w-4 h-4"></i> فتح الملف</button>
+      </form>
+    </div>
+
+    <!-- اتصال مباشر -->
+    <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal>
+      <span class="text-sm font-semibold text-slate-500">اتصال مباشر:</span>
+      <a href="tel:123" class="btn btn-danger"><i data-icon="phone" class="w-4 h-4"></i> الإسعاف 123</a>
+      <a href="emergency-profile.html" class="btn btn-outline">فتح ملف الطوارئ مباشرة (تجربة)</a>
+    </div>
+
+    <p class="mt-8 text-xs text-slate-400 leading-6" data-reveal>
+      هذه الواجهة تعمل حاليًا ببيانات محلية تجريبية — الكود المسجل هو
+      <span class="font-mono" dir="ltr">HC-2026-000123</span>.
+      عند دمج قاعدة البيانات سيتم استرجاع أي ملف حقيقي بنفس هذه الشاشات.
+    </p>
+  </main>
+
+  <div id="hc-footer"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/emergency.js"></script>
+</body>
+</html>

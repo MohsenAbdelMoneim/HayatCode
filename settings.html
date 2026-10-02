@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="settings" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+<main id="main" class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">    <div id="settings-root" class="mb-8" data-reveal>
+      <span class="section-kicker">إدارة حسابك</span>
+      <h1 class="section-title mt-3">الإعدادات</h1>
+      <p class="section-sub mt-1">كل قسم يُحفظ مستقلًا — التعديلات تنعكس فورًا على الملف والبطاقة.</p>
+    </div>
+
+    <div class="grid gap-6">
+      <!-- 1) المعلومات الشخصية -->
+      <section class="panel p-5 sm:p-6" data-reveal>
+        <h2 class="panel-title mb-5"><i data-icon="user" class="w-5 h-5"></i> المعلومات الشخصية</h2>
+        <div class="grid sm:grid-cols-2 gap-x-5 gap-y-5">
+          <div class="sm:col-span-2">
+            <label class="label" for="s-name">الاسم بالكامل</label>
+            <input class="input" id="s-name" type="text">
+            <p class="err" id="err-s-name"></p>
+          </div>
+          <div><label class="label" for="s-birth">تاريخ الميلاد</label><input class="input" id="s-birth" type="date"></div>
+          <div>
+            <label class="label" for="s-phone">رقم الهاتف</label>
+            <input class="input font-mono" id="s-phone" type="tel" dir="ltr">
+            <p class="err" id="err-s-phone"></p>
+          </div>
+          <div class="sm:col-span-2"><label class="label" for="s-address">العنوان</label><input class="input" id="s-address" type="text"></div>
+        </div>
+        <div class="mt-5"><button id="s1-save" class="btn btn-primary btn-sm"><i data-icon="check" class="w-4 h-4"></i> حفظ القسم</button></div>
+      </section>
+
+      <!-- 2) المعلومات الطبية -->
+      <section class="panel p-5 sm:p-6" data-reveal>
+        <h2 class="panel-title mb-5"><i data-icon="heart-pulse" class="w-5 h-5"></i> المعلومات الطبية</h2>
+        <div class="grid sm:grid-cols-2 gap-x-5 gap-y-5">
+          <div>
+            <label class="label" for="s-blood">فصيلة الدم</label>
+            <select class="input" id="s-blood">
+              <option value="" disabled>اختر الفصيلة</option>
+              <option>O+</option><option>O-</option><option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option><option>AB+</option><option>AB-</option>
+            </select>
+            <p class="err" id="err-s-blood"></p>
+          </div>
+          <div><label class="label" for="s-allergies">الحساسية</label><input class="input" id="s-allergies" type="text" placeholder="افصل بفاصلة"></div>
+          <div><label class="label" for="s-diseases">الأمراض المزمنة</label><input class="input" id="s-diseases" type="text"></div>
+          <div><label class="label" for="s-medications">الأدوية الحالية</label><input class="input" id="s-medications" type="text"></div>
+          <div><label class="label" for="s-surgeries">العمليات السابقة</label><input class="input" id="s-surgeries" type="text"></div>
+          <div class="sm:col-span-2"><label class="label" for="s-notes">ملاحظات طبية مهمة</label><textarea class="input" id="s-notes" rows="3"></textarea></div>
+        </div>
+        <div class="mt-5"><button id="s2-save" class="btn btn-primary btn-sm"><i data-icon="check" class="w-4 h-4"></i> حفظ القسم</button></div>
+      </section>
+
+      <!-- 3) جهة اتصال الطوارئ -->
+      <section class="panel p-5 sm:p-6" data-reveal>
+        <h2 class="panel-title mb-5"><i data-icon="phone" class="w-5 h-5"></i> جهة اتصال الطوارئ</h2>
+        <div class="grid sm:grid-cols-3 gap-x-5 gap-y-5">
+          <div>
+            <label class="label" for="s-ec-name">اسم الشخص</label>
+            <input class="input" id="s-ec-name" type="text">
+            <p class="err" id="err-s-ec-name"></p>
+          </div>
+          <div>
+            <label class="label" for="s-ec-relation">صلة القرابة</label>
+            <select class="input" id="s-ec-relation">
+              <option value="" disabled>اختر</option>
+              <option>الأب</option><option>الأم</option><option>الزوج</option><option>الزوجة</option>
+              <option>الأخ</option><option>الأخت</option><option>الابن</option><option>الابنة</option>
+              <option>صديق</option><option>أخرى</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="s-ec-phone">رقم الهاتف</label>
+            <input class="input font-mono" id="s-ec-phone" type="tel" dir="ltr">
+            <p class="err" id="err-s-ec-phone"></p>
+          </div>
+        </div>
+        <div class="mt-5"><button id="s3-save" class="btn btn-primary btn-sm"><i data-icon="check" class="w-4 h-4"></i> حفظ القسم</button></div>
+      </section>
+
+      <!-- 4) الخصوصية -->
+      <section class="panel p-5 sm:p-6" data-reveal>
+        <h2 class="panel-title mb-2"><i data-icon="lock" class="w-5 h-5"></i> الخصوصية</h2>
+        <p class="text-xs text-slate-400 mb-3">في هذه النسخة تُخزَّن التفضيلات محليًا، وسيُطبَّق أثرها الحقيقي عند دمج قاعدة البيانات.</p>
+        <div class="divide-y divide-slate-100">
+          <label class="flex items-center justify-between gap-4 py-3.5 cursor-pointer">
+            <span><b class="block text-sm">إظهار الملاحظات الخاصة للمسعف</b><span class="text-xs text-slate-500">إيقافها يخفي حقل الملاحظات في ملف الطوارئ</span></span>
+            <span class="switch"><input type="checkbox" id="t-pn" aria-label="إظهار الملاحظات للمسعف"><span class="track"></span><span class="knob"></span></span>
+          </label>
+          <label class="flex items-center justify-between gap-4 py-3.5 cursor-pointer">
+            <span><b class="block text-sm">إظهار رقم هاتفي للمسعف</b><span class="text-xs text-slate-500">إيقافها يخفي رقمك من ملف الطوارئ</span></span>
+            <span class="switch"><input type="checkbox" id="t-pp" aria-label="إظهار رقم الهاتف للمسعف"><span class="track"></span><span class="knob"></span></span>
+          </label>
+          <label class="flex items-center justify-between gap-4 py-3.5 cursor-pointer">
+            <span><b class="block text-sm">السماح بالوصول دون إنترنت (تخزين محلي)</b><span class="text-xs text-slate-500">الاحتفاظ بنسخة محلية من الملف على الجهاز</span></span>
+            <span class="switch"><input type="checkbox" id="t-off" aria-label="الوصول دون إنترنت"><span class="track"></span><span class="knob"></span></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 5) اللغة والإشعارات -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        <section class="panel p-5 sm:p-6" data-reveal>
+          <h2 class="panel-title mb-4"><i data-icon="globe" class="w-5 h-5"></i> اللغة</h2>
+          <label class="label" for="s-lang">لغة الواجهة</label>
+          <select class="input" id="s-lang">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+          </select>
+          <p class="hint mt-3">النسخة الإنجليزية ستتاح عند تكامل قاعدة البيانات.</p>
+        </section>
+
+        <section class="panel p-5 sm:p-6" data-reveal>
+          <h2 class="panel-title mb-2"><i data-icon="bell" class="w-5 h-5"></i> الإشعارات</h2>
+          <div class="divide-y divide-slate-100">
+            <label class="flex items-center justify-between gap-4 py-3 cursor-pointer">
+              <span class="text-sm font-semibold">تنبيه مراجعة البيانات دوريًا</span>
+              <span class="switch"><input type="checkbox" id="t-nr" aria-label="تنبيه مراجعة البيانات"><span class="track"></span><span class="knob"></span></span>
+            </label>
+            <label class="flex items-center justify-between gap-4 py-3 cursor-pointer">
+              <span class="text-sm font-semibold">رسائل حالة البطاقة</span>
+              <span class="switch"><input type="checkbox" id="t-ns" aria-label="رسائل حالة البطاقة"><span class="track"></span><span class="knob"></span></span>
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <!-- 6) منطقة الخطر -->
+      <section class="rounded-2xl border-2 border-danger-100 bg-danger-50 p-5 sm:p-6" data-reveal>
+        <h2 class="font-bold text-danger-700 flex items-center gap-2"><i data-icon="trash" class="w-5 h-5"></i> منطقة الخطر</h2>
+        <p class="text-sm text-danger-700/80 mt-2 leading-7">مسح جميع البيانات المحفوظة محليًا على هذا الجهاز، والعودة إلى البيانات التجريبية الافتراضية.</p>
+        <button id="s-clear" class="btn btn-danger btn-sm mt-4">مسح البيانات المحلية</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- نافذة تأكيد المسح -->
+  <div id="s-modal" class="hidden fixed inset-0 z-50 bg-navy-950/60 grid place-items-center p-4" role="dialog" aria-modal="true" aria-labelledby="s-modal-t">
+    <div class="panel max-w-sm w-full p-6">
+      <span class="w-12 h-12 rounded-xl bg-danger-50 text-danger-600 grid place-items-center"><i data-icon="trash" class="w-6 h-6"></i></span>
+      <h3 id="s-modal-t" class="font-bold text-lg mt-4">مسح البيانات المحلية؟</h3>
+      <p class="text-sm text-slate-500 leading-7 mt-2">سيتم حذف ملف المواطن المحفوظ على هذا الجهاز، وستعود جميع الصفحات إلى البيانات التجريبية الافتراضية.</p>
+      <div class="mt-6 flex gap-3">
+        <button id="s-modal-cancel" class="btn btn-outline flex-1">إلغاء</button>
+        <button id="s-modal-confirm" class="btn btn-danger flex-1">تأكيد المسح</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="hc-footer"></div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

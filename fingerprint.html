@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التعريف بالباركود — حياة كود</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="barcode" class="min-h-screen flex flex-col bg-paper text-navy-900">
+  <div id="hc-header"></div>
+
+  <main id="main" class="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6 py-10">
+    <a href="emergency.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline mb-5">
+      <i data-icon="chev-r" class="w-4 h-4"></i> العودة لشاشة الطوارئ
+    </a>
+    <h1 class="section-title">التعريف بالباركود</h1>
+    <p class="section-sub mt-2">الطريقة البديلة — باركود CODE128 يحمل المعرّف نفسه، ويُقرأ بأي قارئ باركود.</p>
+
+    <!-- باركود المواطن -->
+    <div class="panel p-6 mt-8 text-center" data-reveal>
+      <h2 class="panel-title justify-center"><i data-icon="barcode" class="w-5 h-5"></i> باركود المواطن الحالي</h2>
+      <div class="mt-4 inline-block bg-white border border-slate-200 rounded-xl px-4 py-3">
+        <svg id="bc-display"></svg>
+      </div>
+      <p class="text-xs text-slate-400 mt-3">يُطبع على الوجه الخلفي للبطاقة — استخدم قارئ الباركود أو المحاكاة أدناه.</p>
+      <button id="bc-sim" class="btn btn-primary mt-5"><i data-icon="barcode" class="w-4 h-4"></i> محاكاة مسح الباركود</button>
+      <div id="bc-prog" class="hidden mt-5">
+        <div class="meter"><i id="bc-prog-bar" style="width:0%"></i></div>
+        <p id="bc-prog-txt" class="text-xs text-slate-500 mt-2" role="status">جارٍ القراءة…</p>
+      </div>
+    </div>
+
+    <!-- نتيجة المسح -->
+    <div id="bc-result" class="hidden" aria-live="polite"></div>
+
+    <!-- الإدخال اليدوي -->
+    <div class="panel p-5 mt-4" data-reveal>
+      <h2 class="panel-title mb-4"><i data-icon="search" class="w-5 h-5"></i> إدخال رقم الباركود يدويًا</h2>
+      <form id="bc-form" class="flex flex-col sm:flex-row gap-3" novalidate>
+        <div class="flex-1">
+          <label class="sr-only" for="bc-input">رقم الباركود</label>
+          <input id="bc-input" class="input font-mono" dir="ltr" placeholder="HC-2026-000123" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary shrink-0">تحقّق</button>
+      </form>
+      <p class="hint">لعرض حالة الخطأ: أدخل كودًا بصيغة خاطئة أو غير مسجل محليًا.</p>
+    </div>
+  </main>
+
+  <div id="hc-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/barcode.js"></script>
+</body>
+</html>
